@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <style>
+    body{
+      background-color: #0E1117;
+      color: aliceblue;
+    }
+
+  </style>
+     <!-- ---------------------------------------------navigation bar------------------------------ -->
+     <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4 text-light">
+            <h1>GPS Toll based System simulation using Python</h1>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+        
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                   
+            <img width="48" height="48" src="https://img.icons8.com/fluency/96/car--v1.png" alt="car--v1"/>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav mx-4">
+                  <a class="nav-link active text-light" aria-current="page" href="{{ url_for('home') }}">Home</a>
+                  <a class="nav-link text-light" href="{{ url_for('map') }}">Map</a>
+                  <a class="nav-link text-light" href="{{ url_for('price') }}">Pricing</a>
+                  
+                </div>
+              </div>
+            
+          </nav>
+          <div>
+            <a class="btn btn-primary" href="{{url_for('logout')}}" role="button">logout</a>
+            <a class="btn btn-primary" href="{{url_for('home')}}" role="button">back</a>
+          </div>
+          
+        </div>
+      </nav>
+      <!-- ---------------------------------------------navigation bar------------------------------ -->
+       
+        <div style="width: 50%; display: flex; margin-left: 10%; margin-top: 10%;" >
+          <div><img width="100" height="100" src="https://img.icons8.com/ios-filled/100/FFFFFF/user-male-circle.png" alt="user-male-circle"/></div>
+          <div style="margin-left:20px ; margin-top: 10px;">
+            <div><h3>{{username}}</h3></div>
+            <div style="display: flex;">
+             <div style="display: flex;"><img width="24" height="24" src="https://img.icons8.com/material-outlined/96/FFFFFF/security-pass.png" alt="security-pass"/></div><div style="margin-right: 10px;"><h5>{{number}}</h5></div></div>
+          </div>
+        </div>
+
+      <!-- <div  style="width: 900px; display: flex; margin-left: 10%; margin-top: 10%;">
+        <div ><img width="100" height="100" src="https://img.icons8.com/ios-filled/100/FFFFFF/user-male-circle.png" alt="user-male-circle"/>
+          <div style="width: 900px; padding: 12px 3px;margin-top: 20px;"><h1 class="text-start " style="font-size: 28px;">{{username}}</h1></div>
+          <div><h3>{{number}}</h3></div>
+        </div>
+        
+       </div> -->
+       
+       <div style="display: flex; margin-left: 11%;" >
+        <!-- <h2>Account Invoice </h2> 
+        <a class="btn btn-primary" href="#" role="button">Check</a>
+        <h1>{{balance}}</h1> -->
+        <p style="margin-right: 40px; margin-top: 10px; height: 60px;">
+          <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            check Balance
+          </a>
+          <a class="btn btn-primary"  href="{{url_for('recharge')}}">Recharge</a>
+        </p>
+        <div class="collapse" id="collapseExample" >
+          <div class="card card-body" style=" width: 200px; height: 60px; color: green;background-color: rgb(255,255,255,0.1 );">
+            <h4 style=" margin-bottom: 10px;">{{balance}}Rs.</h4>
+           
+          </div>
+        </div>
+      </div>
+      <br><br>
+      <div style="display: flex; margin-left: 11%;" >
+        <h2>Account Invoice </h2>
+      </div>
+      <div style="margin: 0px 20%; margin-left: 11%;" >
+        <table class="table table-bordered text-light">
+          <thead>
+            <tr>
+              <th scope="col">Sr.No</th>
+              <th scope="col">From</th>
+              <th scope="col"></th>
+              <th scope="col">To</th>
+              <th scope="col">Vehicle</th>
+              <th scope="col">Distance</th>
+              <th scope="col">fine</th>
+              <th scope="col">Toll-Tax</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for bill in user %}
+  
+            <tr>
+              <th scope="row">{{loop.index}}</th>
+              <td>{{bill.destination1}}</td>
+              <td ><img width="16" height="16" src="https://img.icons8.com/cotton/64/000000/double-path.png" alt="double-path"/></td>
+              <td>{{bill.destination2}}</td>
+              <td>{{bill.vehicle}}</td>
+              <td>{{bill.distance}}</td>
+              <td>{{bill.fine}}</td>
+              <td>{{bill.tax}}</td>
+              <td>{{bill.total}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+      </div>
+
+
+
+<!--     
+      <button id="balance_check">Open Text File</button>
+      <div id="balance_amount">{{balance}}</div>
+      <script>
+        const button = document.getElementById("balance_check");
+        const textContainer = document.getElementById("balance_amount");
+
+        button.addEventListener("click", function() {
+            // Simulate fetching text file content (replace with your actual logic)
+            const textContent = {{balance}}
+
+            // Display the content in the textContainer element
+            balance_amount.innerText = textContent;
+        });
+    </script> -->
+<!-- <script>
+  var myCollapse = document.getElementById('myCollapse')
+var bsCollapse = new bootstrap.Collapse(myCollapse, {
+  toggle: false
+})
+</script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>

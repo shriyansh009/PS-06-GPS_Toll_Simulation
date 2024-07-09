@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+<body>
+  <style>
+    body{
+      background-color: #0E1117;
+      color: aliceblue;
+    }
+  </style>
+        <!-- ---------------------------------------------navigation bar------------------------------ -->
+     <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4 text-light">
+            <h1>GPS Toll based System simulation using Python
+            </h1>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a href="{{ url_for('profile') }}" style="margin-left:10px ;"><img width="45" height="45" src="https://img.icons8.com/ios-filled/100/FFFFFF/user-male-circle.png" alt="user-male-circle"/></a>
+        </div>
+          <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                   
+            <img width="48" height="48" src="https://img.icons8.com/fluency/96/car--v1.png" alt="car--v1"/>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav mx-4">
+                  <a class="nav-link active text-light" aria-current="page" href="{{ url_for('home') }}">Home</a>
+                  <a class="nav-link text-light" href="{{ url_for('map') }}">Map</a>
+                  <a class="nav-link text-light" href="{{ url_for('price') }}">Pricing</a>
+                  
+                </div>
+              </div>
+            
+          </nav>
+          <div>
+            <a class="btn btn-primary" href="{{url_for('userdata')}}" role="button">Travel History</a>
+          <a class="btn btn-primary" href="{{url_for('home')}}" role="button">back</a>
+            
+          </div>
+         
+        </div>
+      </nav>
+      <!-- ---------------------------------------------navigation bar------------------------------ -->
+      {% with messages = get_flashed_messages() %}
+         {% if messages %}
+          {% for message in messages %}
+             <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}   
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             </div> 
+
+                     {% endfor %}
+          {% endif %}
+          
+
+         {% endwith %} 
+
+       <div style="margin-left: 3%; margin-top: 30px;" >
+        <h1> <img width="75" height="75" src="https://img.icons8.com/parakeet-line/96/FFFFFF/user-shield.png" alt="user-shield"/>Admin</h1>
+        <form method="POST" action="">
+          <label for="loc" style="font-size: x-large; margin-top: 20px;">Route :</label><br>
+          <select  style="width: 180px; height: 50px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; margin-right: 20px; "id="loc1" name="loc1" >
+          <option style="color: rgb(0, 0, 0);" selected> Location1...</option>
+          <option style="color: rgb(0, 0, 0);" value="nagpur" >Nagpur</option>
+          <option style="color: rgb(0, 0, 0);" value="wardha">Wardha</option>
+          <option style="color: rgb(0, 0, 0);" value="karanja">Karanja</option>
+          </select>To
+          <select  style="width: 180px; height: 50px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; margin-left: 20px;"id="loc2" name="loc2" >
+            <option style="color: rgb(0, 0, 0);" selected> Location2...</option>
+            <option style="color: rgb(0, 0, 0);" value="nagpur" >Nagpur</option>
+            <option style="color: rgb(0, 0, 0);" value="wardha">Wardha</option>
+            <option style="color: rgb(0, 0, 0);" value="karanja">Karanja</option>
+            </select><br><br>
+
+          <label for="Vehicle_type" style="font-size: x-large;">Type Of Vehicle and Rates(/Km):</label><br>
+          <!-- <select  style="width: 150px; height: 50px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; "id="Vehicle_type" name="Vehicle_type" >
+          <option style="color: rgb(0, 0, 0);" selected>Select...</option>
+          <option style="color: rgb(0, 0, 0);" value="Bike" >Bike</option>
+          <option style="color: rgb(0, 0, 0);" value="Car">Car</option>
+          <option style="color: rgb(0, 0, 0);" value="Truck">Truck</option>
+          <option style="color: rgb(0, 0, 0);" value="Others">Others</option>
+          </select>  -->
+          <label for="bike" style="font-size: x-large;">Bike :</label>
+          <input type="float"  style="width: 100px; height: 35px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; margin-left: 50px;" id="bike"  name="bike" placeholder="Rate">
+            /Km<br>
+          <label for="car" style="font-size: x-large;">Car :</label>
+          <input type="float"  style="width: 100px; height: 35px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue;margin-left: 60px; " id="car"  name="car" placeholder="Rate">
+          /Km   <br>
+          <label for="truck" style="font-size: x-large;">Truck :</label>
+          <input type="float"  style="width: 100px; height: 35px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; margin-left: 40px;" id="truck"  name="truck" placeholder="Rate">
+          /Km<br>
+          <label for="others" style="font-size: x-large;">Others :</label>
+          <input type="float"  style="width: 100px; height: 35px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; margin-left: 25px; " id="others"  name="others" placeholder="Rate">
+          /Km<br><br>
+
+          <!-- <label for="Weather" style="font-size: x-large;">Weather:</label><br>
+          <select  style="width: 150px; height: 50px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; "id="Weather" name="Weather" >
+          <option style="color: rgb(0, 0, 0);" selected>Select...</option>
+          <option style="color: rgb(0, 0, 0);" value="Sunny" >Sunny</option>
+          <option style="color: rgb(0, 0, 0);" value="Rainy">Rainy</option>
+          <option style="color: rgb(0, 0, 0);" value="Foggy">Foggy</option>
+          </select>  -->
+          <!-- <input type="float"  style="width: 180px; height: 50px; margin-top: 20px; border-radius: 5px ;border:none; background: rgba(255,255,255,0.1); color: aliceblue; " id="con" placeholder="Concession" name="con"><br><br> -->
+        
+          <button type="submit"  class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+
+             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+      </body>
+    </html>
