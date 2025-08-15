@@ -78,7 +78,6 @@ Click on this to open browser:
 • [Shravani_Shegokar](https://github.com/Shravani-Shegokar) (Frontend)  
 • [Shriyansh_Fasate](https://github.com/shriyansh009) (Backend)
 
-
 ## Acknowledgement
 ● [GeoPandas](https://geopandas.org/en/stable/)  
 ● [Shapely](https://shapely.readthedocs.io/en)  
